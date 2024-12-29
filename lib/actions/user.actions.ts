@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/dbConfig";
 import User from "../models/user.model";
+import mongoose from "mongoose";
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
@@ -33,6 +34,43 @@ export async function getUserById(userId: string) {
     handleError(error);
   }
 }
+
+
+// export async function getUserById(userId: string) {
+//   try {
+//     console.log("UserId:", userId);
+
+//     await connectToDatabase();
+//     console.log("Connected to database");
+
+//     // Access native MongoDB client via Mongoose
+//     const db = mongoose.connection.db;
+//     if(!db) throw new Error("do not find db");
+//     const collections = await db.listCollections().toArray();
+//     console.log("Collections in DB:", collections);
+    
+//     // Query the "users" collection
+    
+//     // Query for a specific user
+//     const user = await db.collection("users").findOne({ clerkId: userId });
+//     console.log("User Found:", user);
+
+//     // Fetch all users directly from the "users" collection
+//     const allUsers = await db.collection("users").find({}).toArray();
+//     console.log("All users from DB:", allUsers);
+
+//     // Fetch specific user by `clerkId` field
+//     // const user = await db.collection("users").findOne({ clerkId: userId });
+//     // console.log("User found:", user);
+
+//     if (!user) throw new Error("User not found");
+
+//     return user; // No need to JSON stringify/parse here
+//   } catch (error:any) {
+//     console.log("Error in getUserById:", error.message);
+//   }
+// }
+
 
 // UPDATE
 export async function updateUser(clerkId: string, user: UpdateUserParams) {

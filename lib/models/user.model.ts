@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema({
   clerkId: {
@@ -35,6 +35,10 @@ const UserSchema = new Schema({
     default: 10,
   },
 });
+
+// if (mongoose.models.User) {
+//       delete mongoose.models.Thread;
+// }
 
 const User = models?.User || model("User", UserSchema);
 
